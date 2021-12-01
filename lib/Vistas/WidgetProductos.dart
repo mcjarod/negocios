@@ -69,7 +69,7 @@ class _productos_cardsState extends State<productos_cards> {
                 borderRadius: BorderRadius.circular(20),
                 child: Material(
                   child: Ink.image(
-                    image: NetworkImage(pro.url_imagen),
+                    image: AssetImage(pro.url_imagen),//NetworkImage(pro.url_imagen),
                     //fit: BoxFit.cover,
                     child: InkWell(
                       onTap: (){
@@ -86,7 +86,7 @@ class _productos_cardsState extends State<productos_cards> {
           ),
           const SizedBox(height: 4,),
           Text(pro.producto_servicio, style: TextStyle(fontSize: 17),),
-          Text("\$"+pro.precio.toString(), style: TextStyle(fontSize: 17))
+          Text("\$ "+pro.precio.toStringAsFixed(0), style: TextStyle(fontSize: 17))
         ],
       ),
     );

@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:listatiendas/Vistas/PaginaHome.dart';
@@ -31,7 +29,7 @@ class _MyAppState extends State<MyApp> {
       debugShowCheckedModeBanner: false,
       title: 'Principal',
       home: Scaffold(
-        appBar: AppBar(title: Text("Tiendas"),),
+        //appBar: AppBar(title: Text("Tiendas"),),
         body: _paginas[_paginactual],
 
           bottomNavigationBar: BottomNavigationBar(

@@ -11,7 +11,8 @@ class detalle extends StatelessWidget{
       body: Center(
         child: Column(
           children: [
-            Image.network(negocio.logo, fit: BoxFit.cover,),
+            //Image.asset(negocio.logo, fit: BoxFit.cover,),
+            Image.network(negocio.logo, fit: BoxFit.cover),
             SizedBox(height: 15),
             Text("Nombre: "+negocio.nombre, style: TextStyle(fontSize: 20)),
             Text("Direccion: "+negocio.direccion, style: TextStyle(fontSize: 20)),

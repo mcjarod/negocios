@@ -26,7 +26,7 @@ class tarjetas extends StatelessWidget{
             ),
             leading: CircleAvatar(
               radius: 30,
-              backgroundImage: NetworkImage(tienda[index].logo),
+              backgroundImage: NetworkImage(tienda[index].logo, scale: 3),//AssetImage(tienda[index].logo),//
               //child: Image.network("https://drive.google.com/uc?export=view&id=1kvLxC89BMNXw3aRmguELqYuPYqB-Hijd", fit: BoxFit.cover,)//Text(tienda[index].nombre.substring(0,1)),
             ),
             trailing: Icon(FabianIcon.carro_compras),
