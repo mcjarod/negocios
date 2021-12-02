@@ -11,6 +11,7 @@ class conexion {
   static String pass = 'Grupo25DB2';
   static String db = 'grupo7b_equipo2';
   static int port = 3306;
+  //nueva conexion base de datos en la nube
 
   conexion();
 
