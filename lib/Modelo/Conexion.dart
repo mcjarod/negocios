@@ -6,10 +6,10 @@ class conexion {
   static String pass = '1234';
   static String db = 'base_negocios';
   static int port = 3306;*/
-  static String host = 'sql10.freesqldatabase.com';
-  static String user = 'sql10455369';
-  static String pass = 'cudvQnL4z9';
-  static String db = 'sql10455369';
+  static String host = 'grupo25db2.c47knbsonjdi.us-east-2.rds.amazonaws.com';
+  static String user = 'admin';
+  static String pass = 'Grupo25DB2';
+  static String db = 'grupo7b_equipo2';
   static int port = 3306;
 
   conexion();

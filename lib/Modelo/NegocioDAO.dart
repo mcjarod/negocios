@@ -14,7 +14,7 @@ class NegocioDAO{
 
       List<Negocio> lista = [];
      // String sql = "select * from base_negocios.negocios;";
-      String sql = "select * from sql10455369.negocios;";
+      String sql = "select * from grupo7b_equipo2.negocios;";
       conn.query(sql);
       var results = await conn.query(sql);
       for (var row in results) {
@@ -33,7 +33,7 @@ class NegocioDAO{
 
     List<Negocio> lista = [];
     //String sql = "SELECT * FROM base_negocios.negocios where nombre_negocio like '%"+query+"%';";
-    String sql = "SELECT * FROM sql10455369.negocios where nombre_negocio like '%"+query+"%';";
+    String sql = "SELECT * FROM grupo7b_equipo2.negocios where nombre_negocio like '%"+query+"%';";
     conn.query(sql);
     var results = await conn.query(sql);
     for (var row in results) {
@@ -52,7 +52,7 @@ class NegocioDAO{
 
     List<Negocio> lista = [];
     //String sql = "SELECT distinct n.id_negocio, n.nombre_negocio, n.id_tipo, n.telefono_negocio, n.celular_negocio, n.direccion_negocio, n.paginaweb_negocio, n.geolocalizacion_negocio, n.logo, n.foto FROM base_negocios.negocios n, base_negocios.productos_servicios p where p.producto_servicio like '%"+query+"%' and n.id_negocio=p.id_negocio;";
-    String sql = "SELECT distinct n.id_negocio, n.nombre_negocio, n.id_tipo, n.telefono_negocio, n.celular_negocio, n.direccion_negocio, n.paginaweb_negocio, n.geolocalizacion_negocio, n.logo, n.foto FROM sql10455369.negocios n, sql10455369.productos_servicios p where p.producto_servicio like '%"+query+"%' and n.id_negocio=p.id_negocio;";
+    String sql = "SELECT distinct n.id_negocio, n.nombre_negocio, n.id_tipo, n.telefono_negocio, n.celular_negocio, n.direccion_negocio, n.paginaweb_negocio, n.geolocalizacion_negocio, n.logo, n.foto FROM grupo7b_equipo2.negocios n, grupo7b_equipo2.productos_servicios p where p.producto_servicio like '%"+query+"%' and n.id_negocio=p.id_negocio;";
     conn.query(sql);
     var results = await conn.query(sql);
     for (var row in results) {
