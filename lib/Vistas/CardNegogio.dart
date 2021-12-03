@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:listatiendas/Vistas/PaginaCompras.dart';
 import 'package:listatiendas/fabian_icons.dart';
 import 'DetalleNegocio.dart';
 import 'WidgetProductos.dart';
@@ -29,7 +30,9 @@ class tarjetas extends StatelessWidget{
               backgroundImage: NetworkImage(tienda[index].logo, scale: 3),//AssetImage(tienda[index].logo),//
               //child: Image.network("https://drive.google.com/uc?export=view&id=1kvLxC89BMNXw3aRmguELqYuPYqB-Hijd", fit: BoxFit.cover,)//Text(tienda[index].nombre.substring(0,1)),
             ),
-            trailing: Icon(FabianIcon.carro_compras),
+            trailing: IconButton(onPressed: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>PaginaCompras(index: index,negocio: tienda,)));
+            }, icon: Icon(FabianIcon.carro_compras)),
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>detalle(tienda[index])));
             },
