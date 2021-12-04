@@ -4,6 +4,9 @@
         android:label="listatiendas"
         android:icon="@mipmap/ic_launcher">
 
+        <meta-data android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDjLegArAOcKqEs41w-pNqPU7SZszL-w5s"/>
+
         <activity
             android:name=".MainActivity"
             android:launchMode="singleTop"
