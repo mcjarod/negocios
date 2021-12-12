@@ -156,7 +156,10 @@ int id_cliente=0;
                   );
                 });
           }),
-      floatingActionButton: ElevatedButton(
+
+      floatingActionButton: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [ElevatedButton(
         onPressed: (){
           showDialog(
             // barrierDismissible: false, //para que solo se cierre con los botones
@@ -175,14 +178,46 @@ int id_cliente=0;
               for(int i=0; i<widget.productos_select.length;i++){
                 ProductopedidosDAO().insertar(widget.productos_select[i].id_producto_servicio,widget.productos_select[i].cantidad,id_pedido);
               }
-              Mensaje(context, "Pedido realizado con exito");
+              Mensaje(context, "Pedido realizado con exito, pronto lo enviaremos");
               Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> MyApp(id_cliente: widget.id_cliente,)), (route) => false);
               //Navigator.of(context).pop();
             }
           });
         },
-        child: Text("Pagar \$"+t.toStringAsFixed(0), style: TextStyle(fontSize: 25),),
+        child: Text("Pagar con domicilio \$"+t.toStringAsFixed(0) + "+1500" , style: TextStyle(fontSize: 25),),
       ),
+
+            ElevatedButton(
+              onPressed: (){
+                showDialog(
+                  // barrierDismissible: false, //para que solo se cierre con los botones
+                  context: context,
+                  builder: (context)=> AlertDialog(
+                    title: Text("Confirmar pedido por valor el de \$"+t.toStringAsFixed(0)),
+                    actions: <Widget>[
+                      TextButton(onPressed:(){ Navigator.of(context).pop("s");}, child: Text("si")),
+                      TextButton(onPressed:(){ Navigator.of(context).pop("n");}, child: Text("no")),
+                    ],
+                  ),
+                ).then((resultado) async {
+                  if(resultado=="s"){
+                    print(id_cliente);
+                    int id_pedido= await PedidoDAO().insertar(id_cliente,t);
+                    for(int i=0; i<widget.productos_select.length;i++){
+                      ProductopedidosDAO().insertar(widget.productos_select[i].id_producto_servicio,widget.productos_select[i].cantidad,id_pedido);
+                    }
+                    Mensaje(context, "Pedido realizado con exito, ve a la tienda");
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> MyApp(id_cliente: widget.id_cliente,)), (route) => false);
+                    //Navigator.of(context).pop();
+                  }
+                });
+              },
+              child: Text("Recoger en tienda con \$"+t.toStringAsFixed(0), style: TextStyle(fontSize: 25),),
+            ),
+    ]),
+
+
+
 
     );
 
