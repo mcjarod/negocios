@@ -8,7 +8,8 @@ import 'CardNegogio.dart';
 class FiltroCategorias extends StatefulWidget {
   final int item;
   final List categoria;
-  const FiltroCategorias({required this.categoria, required this.item, Key? key}) : super(key: key);
+  final String id_cliente;
+  const FiltroCategorias({required this.categoria, required this.item, required this.id_cliente,Key? key}) : super(key: key);
 
   @override
   State<FiltroCategorias> createState() => _FiltroCategoriasState();
@@ -51,7 +52,7 @@ class _FiltroCategoriasState extends State<FiltroCategorias> {
             return ListView.builder(
                 itemCount: snapshot.data==null ? 0: snapshot.data!.length,
                 itemBuilder: (context, intem){
-                  return tarjetas(snapshot.data!, intem);
+                  return tarjetas(snapshot.data!, intem, widget.id_cliente);
                 });
           }),
     );

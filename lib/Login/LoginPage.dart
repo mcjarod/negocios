@@ -14,6 +14,7 @@ class LoginPage extends StatelessWidget {
   final usu = TextEditingController();
   final pass = TextEditingController();
   final Session session = Session();
+  String id="";
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +36,7 @@ class LoginPage extends StatelessWidget {
           SizedBox(
             height: 40,
           ),
-          _BotonSignIn(usu, pass, session),
+          _BotonSignIn(usu, pass, session,id),
         ],
       ),
     );
@@ -46,7 +47,8 @@ class _BotonSignIn extends StatelessWidget {
   final TextEditingController usuario;
   final TextEditingController pass;
   final Session session;
-  _BotonSignIn(this.usuario, this.pass, this.session);
+  String id="";
+  _BotonSignIn(this.usuario, this.pass, this.session, this.id);
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,8 +68,13 @@ class _BotonSignIn extends StatelessWidget {
               if (user.length > 0) {
                 if (user[0].contrasena == pass.text) {
                   session.EscribirSecureData("id_user", user[0].id_cliente.toString());
+                  session.LeerSecureData("id_user").then((value) {
+                    if(value!=null){
+                      id=value;
+                    }
+                  });
                   //Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> MyApp()), (route) => false);
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> MyApp(id_cliente: id,)), (route) => false);
                 } else {
                   Mensaje(context, "contraseña incorrecta");
                 }

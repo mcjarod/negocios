@@ -4,7 +4,8 @@ import 'package:listatiendas/Modelo/NegocioDAO.dart';
 import 'CardNegogio.dart';
 
 class Buscador_Negocio extends SearchDelegate{
-  Buscador_Negocio() : super(searchFieldLabel: "Buscar por negocio");
+  String id_cliente;
+  Buscador_Negocio(this.id_cliente) : super(searchFieldLabel: "Buscar por negocio");
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -44,7 +45,7 @@ class Buscador_Negocio extends SearchDelegate{
               return ListView.builder(
                   itemCount: snapshot.data==null ? 0: snapshot.data!.length,
                   itemBuilder: (context, item){
-                    return tarjetas(snapshot.data!, item);
+                    return tarjetas(snapshot.data!, item,id_cliente);
                   });
             }else{
               return Center(

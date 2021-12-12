@@ -47,4 +47,28 @@ class ClienteDAO {
     return inserto;
   }
 
+  //lista de clientes por email y contraseña (1)
+  Future<List<ClienteDTO>> clientexid(String id) async {
+    final conn = await db.getconnection();
+    List<ClienteDTO> lista = [];
+    String sql = "select * from grupo7b_equipo2.clientes where id_cliente= "+id+";";
+    conn.query(sql);
+    var results = await conn.query(sql);
+    for (var row in results) {
+      lista.add(
+          new ClienteDTO(
+            row[0],
+            row[1],
+            row[2],
+            row[3],
+            row[4],
+            row[5],
+            row[6],
+          )
+      );
+    }
+    await conn.close();
+    return lista;
+  } //(1)
+
 }

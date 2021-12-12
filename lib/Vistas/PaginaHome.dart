@@ -11,7 +11,8 @@ import 'CardNegogio.dart';
 import 'FiltroCategorias.dart';
 
 class Home extends StatefulWidget {
-  const Home({Key? key}) : super(key: key);
+  final String id_cliente;
+  Home({required this.id_cliente,Key? key}) : super(key: key);
 
   @override
   State<Home> createState() => _HomeState();
@@ -44,11 +45,11 @@ class _HomeState extends State<Home> {
                 ).then((resultado){
                   if(resultado=="n"){
                     showSearch(
-                        context: context, delegate: Buscador_Negocio()
+                        context: context, delegate: Buscador_Negocio(widget.id_cliente)
                     );
                   }else if(resultado=="p"){
                     showSearch(
-                        context: context, delegate: Buscador_Producto()
+                        context: context, delegate: Buscador_Producto(widget.id_cliente)
                     );
                   }
                 });
@@ -92,7 +93,7 @@ class _HomeState extends State<Home> {
                                 itemCount: snapshot.data==null ? 0: snapshot.data!.length,
                                 itemBuilder: (context, intem){
                                   return Card(
-                                    child: IconButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FiltroCategorias(categoria: snapshot.data!, item: intem,)));}, icon: Text(snapshot.data![intem].tipo_negocio, style: TextStyle(fontSize: 17),))
+                                    child: IconButton(onPressed: (){Navigator.of(context).push(MaterialPageRoute(builder: (context)=>FiltroCategorias(categoria: snapshot.data!, item: intem,id_cliente: widget.id_cliente,)));}, icon: Text(snapshot.data![intem].tipo_negocio, style: TextStyle(fontSize: 17),))
                                   );
                                   //return tarjetas(snapshot.data!, intem);
                                 }),
@@ -134,7 +135,7 @@ class _HomeState extends State<Home> {
             return ListView.builder(
                 itemCount: snapshot.data==null ? 0: snapshot.data!.length,
                 itemBuilder: (context, intem){
-                  return tarjetas(snapshot.data!, intem);
+                  return tarjetas(snapshot.data!, intem, widget.id_cliente);
                 });
           }),
     );

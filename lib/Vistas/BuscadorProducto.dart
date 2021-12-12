@@ -5,7 +5,8 @@ import 'package:listatiendas/Vistas/CardNegogioBusqueda.dart';
 import 'CardNegogio.dart';
 
 class Buscador_Producto extends SearchDelegate{
-  Buscador_Producto() : super(searchFieldLabel: "Buscar por producto");
+  String id_cliente;
+  Buscador_Producto(this.id_cliente) : super(searchFieldLabel: "Buscar por producto");
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [

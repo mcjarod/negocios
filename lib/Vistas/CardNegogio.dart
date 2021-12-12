@@ -9,7 +9,8 @@ import 'WidgetProductos.dart';
 class tarjetas extends StatelessWidget{
   List tienda;
   int index;
-  tarjetas(this.tienda, this.index);
+  String id_cliente;
+  tarjetas(this.tienda, this.index, this.id_cliente);
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +32,7 @@ class tarjetas extends StatelessWidget{
               //child: Image.network("https://drive.google.com/uc?export=view&id=1kvLxC89BMNXw3aRmguELqYuPYqB-Hijd", fit: BoxFit.cover,)//Text(tienda[index].nombre.substring(0,1)),
             ),
             trailing: IconButton(onPressed: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>PaginaCompras(index: index,negocio: tienda,)));
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>PaginaCompras(index: index,negocio: tienda,id_cliente: id_cliente,)));
             }, icon: Icon(FabianIcon.carro_compras)),
             onTap: (){
               Navigator.push(context, MaterialPageRoute(builder: (context)=>detalle(tienda[index])));

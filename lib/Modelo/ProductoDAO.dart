@@ -42,7 +42,36 @@ class ProductoDAO{
     return lista;
   }//(1)
 
+  //lista de productos por id (1)
+  Future<product> listadoproductos(int id) async{
+    final conn = await db.getconnection();
 
+    product producto=product(0, "", 0, 0,"");
+    //String sql = "select * from base_negocios.productos_servicios where id_negocio="+id_negocio.toString()+";";
+    String sql = "select * from grupo7b_equipo2.productos_servicios where id_ps="+id.toString()+";";
+    conn.query(sql);
+    var results = await conn.query(sql);
+    for (var row in results) {
+      producto = new product(row[0], row[1], row[2], row[3], row[4]);
+    }
+    await conn.close();
+    return producto;
+  }//(1)
+
+  Future precio(int id) async{
+    final conn = await db.getconnection();
+
+    var precio;
+    //String sql = "select * from base_negocios.productos_servicios where id_negocio="+id_negocio.toString()+";";
+    String sql = "select precio from grupo7b_equipo2.productos_servicios where id_ps="+id.toString()+";";
+    conn.query(sql);
+    var results = await conn.query(sql);
+    for (var row in results) {
+      precio = row[0];
+    }
+    await conn.close();
+    return precio;
+  }//(1)
 
 
 }

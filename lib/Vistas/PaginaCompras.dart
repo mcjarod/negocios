@@ -10,13 +10,16 @@ import 'package:listatiendas/Modelo/ProductoDTO.dart';
 import 'package:listatiendas/Vistas/BuscadorNegocio.dart';
 import 'package:listatiendas/Vistas/BuscadorProducto.dart';
 import 'package:listatiendas/Vistas/CardProducto.dart';
+import 'package:listatiendas/Vistas/PaginaPagoCompra.dart';
+import 'package:listatiendas/fabian_icons.dart';
 import 'CardNegogio.dart';
 import 'FiltroCategorias.dart';
 
 class PaginaCompras extends StatefulWidget {
   final List negocio;
   final int index;
-  const PaginaCompras({required this.index, required this.negocio, Key? key}) : super(key: key);
+  final String id_cliente;
+  const PaginaCompras({required this.index, required this.negocio, required this.id_cliente,Key? key}) : super(key: key);
 
   @override
   State<PaginaCompras> createState() => _PaginaComprasState();
@@ -24,7 +27,7 @@ class PaginaCompras extends StatefulWidget {
 
 
 class _PaginaComprasState extends State<PaginaCompras> {
-
+  var list=[];
 
   @override
   Widget build(BuildContext context) {
@@ -59,9 +62,17 @@ class _PaginaComprasState extends State<PaginaCompras> {
             return ListView.builder(
                 itemCount: snapshot.data==null ? 0: snapshot.data!.length,
                 itemBuilder: (context, intem){
-                  return TarjetaProducto(snapshot.data!, intem);
+                  return TarjetaProducto(snapshot.data!, intem, list);
                 });
           }),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){
+          Navigator.push(context, MaterialPageRoute(builder: (context)=>PaginaPagoCompras(productos_select: list, negocio: widget.negocio,id_cliente: widget.id_cliente,)));
+        },
+        tooltip: 'Carrito de compras',
+        child: const Icon(FabianIcon.carro_compras),
+      ),
+
     );
 
   }
