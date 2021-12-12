@@ -3,18 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:listatiendas/Modelo/ClienteDAO.dart';
 import 'package:listatiendas/Modelo/Session.dart';
 
-
-
 import '../Vistas/Home.dart';
 import 'HeaderLogin.dart';
 import 'LoginHeader.dart';
 import 'TextFieldCustom.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
+  @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
   final usu = TextEditingController();
+
   final pass = TextEditingController();
+
   final Session session = Session();
-  String id="";
+
+  String id = "";
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -31,12 +39,39 @@ class LoginPage extends StatelessWidget {
           SizedBox(
             height: 40,
           ),
-          _EmailAndPassword(usu, pass),
+          //_EmailAndPassword(usu, pass),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: Column(
+              children: [
+                TextField(
+                  controller: usu,
+                  decoration: InputDecoration(
+                      prefixIcon: Icon(
+                        Icons.mail_outline,
+                        color: Colors.grey,
+                      ),
+                      hintText: "Digite su correo"),
+                ),
+                SizedBox(height: 20),
+                TextField(
+                    controller: pass,
+                    obscureText: true,
+                    decoration: InputDecoration(
+                        prefixIcon: Icon(
+                          Icons.visibility_off,
+                          color: Colors.grey,
+                        ),
+                        hintText: "Contraseña")),
+              ],
+            ),
+          ),
+          ///////////
           _ForgotPassword(),
           SizedBox(
             height: 40,
           ),
-          _BotonSignIn(usu, pass, session,id),
+          _BotonSignIn(usu, pass, session, id),
         ],
       ),
     );
@@ -47,7 +82,7 @@ class _BotonSignIn extends StatelessWidget {
   final TextEditingController usuario;
   final TextEditingController pass;
   final Session session;
-  String id="";
+  String id = "";
   _BotonSignIn(this.usuario, this.pass, this.session, this.id);
   @override
   Widget build(BuildContext context) {
@@ -67,14 +102,21 @@ class _BotonSignIn extends StatelessWidget {
               List user = await ClienteDAO().listado(usuario.text);
               if (user.length > 0) {
                 if (user[0].contrasena == pass.text) {
-                  session.EscribirSecureData("id_user", user[0].id_cliente.toString());
+                  session.EscribirSecureData(
+                      "id_user", user[0].id_cliente.toString());
                   session.LeerSecureData("id_user").then((value) {
-                    if(value!=null){
-                      id=value;
+                    if (value != null) {
+                      id = value;
                     }
                   });
                   //Navigator.push(context, MaterialPageRoute(builder: (context)=>MyApp()));
-                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=> MyApp(id_cliente: id,)), (route) => false);
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => MyApp(
+                                id_cliente: id,
+                              )),
+                      (route) => false);
                 } else {
                   Mensaje(context, "contraseña incorrecta");
                 }
@@ -116,11 +158,27 @@ class _EmailAndPassword extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          TextField(controller: usuario, decoration: InputDecoration(prefixIcon: Icon(Icons.mail_outline, color: Colors.grey,),hintText: "Digite su correo"),),
+          TextField(
+            controller: usuario,
+            decoration: InputDecoration(
+                prefixIcon: Icon(
+                  Icons.mail_outline,
+                  color: Colors.grey,
+                ),
+                hintText: "Digite su correo"),
+          ),
           //TextFieldCustom(Icons.mail_outline, TextInputType.emailAddress, false,"Correo", usuario),
           SizedBox(height: 20),
           //TextFieldCustom(Icons.visibility_off, TextInputType.text, true,"Contraseña", pass),
-        TextField(controller: pass, obscureText: true, decoration: InputDecoration(prefixIcon: Icon(Icons.visibility_off, color: Colors.grey,),hintText: "Contraseña")),
+          TextField(
+              controller: pass,
+              obscureText: true,
+              decoration: InputDecoration(
+                  prefixIcon: Icon(
+                    Icons.visibility_off,
+                    color: Colors.grey,
+                  ),
+                  hintText: "Contraseña")),
         ],
       ),
     );

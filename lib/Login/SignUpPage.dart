@@ -4,13 +4,21 @@ import 'package:listatiendas/Modelo/ClienteDAO.dart';
 import 'HeaderLogin.dart';
 import 'LoginHeader.dart';
 
-class SignUpPage extends StatelessWidget{
-  final Nomb= TextEditingController();
-  final Tel= TextEditingController();
-  final Direccion= TextEditingController();
-  final Correo= TextEditingController();
-  final Contrasena= TextEditingController();
+class SignUpPage extends StatefulWidget{
+  @override
+  State<SignUpPage> createState() => _SignUpPageState();
+}
 
+class _SignUpPageState extends State<SignUpPage> {
+  final Nomb= TextEditingController();
+
+  final Tel= TextEditingController();
+
+  final Direccion= TextEditingController();
+
+  final Correo= TextEditingController();
+
+  final Contrasena= TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +40,6 @@ class SignUpPage extends StatelessWidget{
       ),
     );
   }
-
 }
 
 class _Boton extends StatelessWidget {
