@@ -7,7 +7,7 @@ import 'package:listatiendas/Modelo/Producto_PedidosDTO.dart';
 import 'package:listatiendas/Modelo/Producto_pedidosDAO.dart';
 import 'package:listatiendas/Modelo/Session.dart';
 
-import '../main.dart';
+import 'Home.dart';
 
 
 

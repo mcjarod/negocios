@@ -5,7 +5,7 @@ import 'package:listatiendas/Modelo/Session.dart';
 
 
 
-import '../main.dart';
+import '../Vistas/Home.dart';
 import 'HeaderLogin.dart';
 import 'LoginHeader.dart';
 import 'TextFieldCustom.dart';
@@ -116,10 +116,11 @@ class _EmailAndPassword extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         children: [
-          TextFieldCustom(Icons.mail_outline, TextInputType.emailAddress, false,"Correo", usuario),
+          TextField(controller: usuario, decoration: InputDecoration(prefixIcon: Icon(Icons.mail_outline, color: Colors.grey,),hintText: "Digite su correo"),),
+          //TextFieldCustom(Icons.mail_outline, TextInputType.emailAddress, false,"Correo", usuario),
           SizedBox(height: 20),
-          TextFieldCustom(Icons.visibility_off, TextInputType.text, true,
-              "Contraseña", pass),
+          //TextFieldCustom(Icons.visibility_off, TextInputType.text, true,"Contraseña", pass),
+        TextField(controller: pass, obscureText: true, decoration: InputDecoration(prefixIcon: Icon(Icons.visibility_off, color: Colors.grey,),hintText: "Contraseña")),
         ],
       ),
     );

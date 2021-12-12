@@ -1,62 +1,89 @@
-import 'package:flutter/cupertino.dart';
+import 'dart:async';
+
 import 'package:flutter/material.dart';
-import 'package:listatiendas/Vistas/PaginaHome.dart';
-import 'package:listatiendas/Vistas/PaginaPedidos.dart';
-import 'package:listatiendas/Vistas/PaginaUsuario.dart';
+import 'package:listatiendas/Login/Login.dart';
+import 'package:listatiendas/Modelo/Session.dart';
+import 'package:page_transition/page_transition.dart';
 
-import 'fabian_icons.dart';
+import 'Vistas/Home.dart';
 
-
-
-class MyApp extends StatefulWidget {
-  String id_cliente;
-  MyApp({required this.id_cliente,Key? key}) : super(key: key);
-
-  @override
-  State<MyApp> createState() => _MyAppState();
+void main() {
+  runApp(const Splash());
 }
 
-class _MyAppState extends State<MyApp> {
-  int _paginactual=0;
-  final List<Widget> _paginas =[
-    Home(id_cliente: "0",),
-    Pagina_Pedido("0"),
-    usuario("0"),
-  ];
+
+class Splash extends StatelessWidget {
+  const Splash({Key? key}) : super(key: key);
+
+  // This widget is the root of your application.
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        // This is the theme of your application.
+        //
+        // Try running your application with "flutter run". You'll see the
+        // application has a blue toolbar. Then, without quitting the app, try
+        // changing the primarySwatch below to Colors.green and then invoke
+        // "hot reload" (press "r" in the console where you ran "flutter run",
+        // or simply save your changes to "hot reload" in a Flutter IDE).
+        // Notice that the counter didn't reset back to zero; the application
+        // is not restarted.
+        primarySwatch: Colors.blue,
+      ),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+    );
+  }
+}
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
+
+  // This widget is the home page of your application. It is stateful, meaning
+  // that it has a State object (defined below) that contains fields that affect
+  // how it looks.
+
+  // This class is the configuration for the state. It holds the values (in this
+  // case the title) provided by the parent (in this case the App widget) and
+  // used by the build method of the State. Fields in a Widget subclass are
+  // always marked "final".
+
+  final String title;
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  final Session session = Session();
+  late String id="";
+  @override
   void initState() {
-    _paginas[0]= Home(id_cliente: widget.id_cliente,);
-    _paginas[1]= Pagina_Pedido(widget.id_cliente);
-    _paginas[2]= usuario(widget.id_cliente);
+    session.LeerSecureData("id_user").then((value) {
+      if(value!=null){
+        id = value;
+      }
+    });
+    Timer(Duration(seconds: 3), ()=> Navigator.pushReplacement(context, PageTransition(child: id==""?Login():MyApp(id_cliente: id,), type: PageTransitionType.leftToRightWithFade)));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Principal',
-      home: Scaffold(
-        //appBar: AppBar(title: Text("Tiendas"),),
-        body: _paginas[_paginactual],
-
-          bottomNavigationBar: BottomNavigationBar(
-            onTap: (index){
-              setState(() {
-                _paginactual=index;
-              });
-            },
-            currentIndex: _paginactual,
-          items: const [
-            BottomNavigationBarItem(icon: Icon(Icons.home), label: "Inicio"),
-            BottomNavigationBarItem(icon: Icon(FabianIcon.carro_compras), label: "Pedidos"),
-            BottomNavigationBarItem(icon: Icon(Icons.supervised_user_circle), label: "Usuario")
-          ],
-      ),
+    // This method is rerun every time setState is called, for instance as done
+    // by the _incrementCounter method above.
+    //
+    // The Flutter framework has been optimized to make rerunning build methods
+    // fast, so that you can just rebuild anything that needs updating rather
+    // than having to individually change instances of widgets.
+    return Scaffold(
+      body: Center(
+        // Center is a layout widget. It takes a single child and positions it
+        // in the middle of the parent.
+        child: Text("Bienvenidos a miTienda", style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),)
       ),
     );
   }
 }
-
-
-
