@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "998866037036",
+    "project_id": "negociosdebarrios",
+    "storage_bucket": "negociosdebarrios.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:998866037036:android:20277fd94ffbb5ffcd6489",
+        "android_client_info": {
+          "package_name": "com.example.listatiendas"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "998866037036-0b7un7vbrd269ge0lccp4nt7hhsdtgv2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAMaNrhcw5NbhgVmOZegc2ycUIuuZjtfd8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "998866037036-0b7un7vbrd269ge0lccp4nt7hhsdtgv2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

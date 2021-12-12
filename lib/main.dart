@@ -1,5 +1,7 @@
 import 'dart:async';
 
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:listatiendas/Login/Login.dart';
 import 'package:listatiendas/Modelo/Session.dart';
@@ -7,7 +9,9 @@ import 'package:page_transition/page_transition.dart';
 
 import 'Vistas/Home.dart';
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();// inicializar la base de datos
+  await Firebase.initializeApp();
   runApp(const Splash());
 }
 
@@ -67,6 +71,26 @@ class _MyHomePageState extends State<MyHomePage> {
       }
     });
     Timer(Duration(seconds: 3), ()=> Navigator.pushReplacement(context, PageTransition(child: id==""?Login():MyApp(id_cliente: id,), type: PageTransitionType.leftToRightWithFade)));
+
+    FirebaseMessaging.instance.getInitialMessage();
+    FirebaseMessaging.onMessage.listen(
+          (message) {
+        if (message.notification != null) {
+          print(message.notification!.body);
+          print(message.notification!.title);
+        }
+        //LocalNotificationService.display(message);
+        print(message);
+      },
+    );
+    FirebaseMessaging.onMessageOpenedApp.listen(
+          (messagge) {
+        final routeMessagge = messagge.data["route"];
+        print(routeMessagge);
+        Navigator.of(context).pushNamed(routeMessagge);
+      },
+    );
+
     super.initState();
   }
 
