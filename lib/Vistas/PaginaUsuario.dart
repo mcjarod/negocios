@@ -31,32 +31,52 @@ class _usuarioState extends State<usuario> {
     super.initState();
   }
 
-
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(cliente.length>0?cliente[0].nombre_cliente:"", style: TextStyle(fontSize: 24),),
-          Text(cliente.length>0?cliente[0].email_cliente:"", style: TextStyle(fontSize: 24),),
-          ElevatedButton(onPressed: (){
-            Session se= Session();
-            se.EliminarSecureData("id_user");
-            Navigator.pushReplacement(context, PageTransition(child: Login(), type: PageTransitionType.leftToRightWithFade));
-          }, child: Text("Actualizar datos")),
-          ElevatedButton(onPressed: (){
-            Session se= Session();
-            se.EliminarSecureData("id_user");
-            Navigator.pushReplacement(context, PageTransition(child: Login(), type: PageTransitionType.leftToRightWithFade));
-          }, child: Text("Darme de baja")),
-          ElevatedButton(onPressed: (){
-            Session se= Session();
-            se.EliminarSecureData("id_user");
-            Navigator.pushReplacement(context, PageTransition(child: Login(), type: PageTransitionType.leftToRightWithFade));
-          }, child: Text("Cerrar Sesion"))
-        ],
+    return Container(
+      decoration: new BoxDecoration(
+          color: Colors.deepPurpleAccent,
+          image: new DecorationImage(
+              fit: BoxFit.cover,
+              image: new AssetImage('assets/images/Navidad2.jpg')
+          )
+      ),
+      child: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircleAvatar(
+              radius: 55,
+              backgroundColor: Color(0xffFDCF09),
+              child: CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('images/Perfil.jpg'),
+              ),
+            ),
+            Text(cliente.length>0?cliente[0].nombre_cliente:"", style: TextStyle(fontSize: 26,color: Colors.white),),
+            Text(cliente.length>0?cliente[0].email_cliente:"", style: TextStyle(fontSize: 18,color: Colors.black),),
+            Text(cliente.length>0?cliente[0].telefono_cliente:"", style: TextStyle(fontSize: 14,color: Colors.black),),
+            TextButton(
+              onPressed: () {
+              },
+              child: Text("Actualizar datos",
+                style: TextStyle(color: Colors.black, fontSize: 17),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+              },
+              child: Text("Darse de baja",
+                style: TextStyle(color: Colors.red, fontSize: 15),
+              ),
+            ),
+            ElevatedButton(onPressed: (){
+              Session se= Session();
+              se.EliminarSecureData("id_user");
+              Navigator.pushReplacement(context, PageTransition(child: Login(), type: PageTransitionType.leftToRightWithFade));
+            }, child: Text("Cerrar Sesion"))
+          ],
+        ),
       ),
     );
   }
