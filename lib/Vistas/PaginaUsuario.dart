@@ -45,6 +45,16 @@ class _usuarioState extends State<usuario> {
             Session se= Session();
             se.EliminarSecureData("id_user");
             Navigator.pushReplacement(context, PageTransition(child: Login(), type: PageTransitionType.leftToRightWithFade));
+          }, child: Text("Actualizar datos")),
+          ElevatedButton(onPressed: (){
+            Session se= Session();
+            se.EliminarSecureData("id_user");
+            Navigator.pushReplacement(context, PageTransition(child: Login(), type: PageTransitionType.leftToRightWithFade));
+          }, child: Text("Darme de baja")),
+          ElevatedButton(onPressed: (){
+            Session se= Session();
+            se.EliminarSecureData("id_user");
+            Navigator.pushReplacement(context, PageTransition(child: Login(), type: PageTransitionType.leftToRightWithFade));
           }, child: Text("Cerrar Sesion"))
         ],
       ),
